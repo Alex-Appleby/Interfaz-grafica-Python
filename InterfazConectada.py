@@ -76,18 +76,20 @@ class InterfazGrafica(tk.Tk):
             child.expect(device_prompt)
             
             #child.sendline('show version | i V')
-            child.expect('#')
+            child.expect('>')
             child.sendline('terminal length 0')
-            child.expect('#')
+            child.expect('>')
             child.sendline('show running-config')
             child.expect(device_prompt)
-            child.expect('#')
+            child.expect('>')
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f">>>>>>>Configuration of {device}<<<<<<<<<")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f">>>>>>>Configuration of {device}<<<<<<<<<\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def protocols(self):
@@ -106,8 +108,8 @@ class InterfazGrafica(tk.Tk):
             
             if(device=='R4'):
                 #child.sendline('terminal length 0')
-                child.sendline('show ip route')
-                child.expect('#')
+                child.sendline('show ip route ospf')
+                child.expect('>')
                 child.sendline(' ')            
                 child.expect(device_prompt)
                 
@@ -117,10 +119,12 @@ class InterfazGrafica(tk.Tk):
                 child.expect(device_prompt)
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f">>>>>>>>>>Protocols of the device {device}<<<<<<<<<<")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f">>>>>>>>>>Protocols of the device {device}<<<<<<<<<<\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def telnetAndSSHConec(self):
@@ -143,10 +147,12 @@ class InterfazGrafica(tk.Tk):
             
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f">>>>>>>>>>SSH and Telnet connectivity of the device {device}<<<<<<<<<<")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f">>>>>>>>>>SSH and Telnet connectivity of the device {device}<<<<<<<<<<\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def acl(self):
@@ -169,10 +175,12 @@ class InterfazGrafica(tk.Tk):
             
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f"ACLs of the device {device}:")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f"ACLs of the device {device}:\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def dhcp(self):
@@ -194,10 +202,12 @@ class InterfazGrafica(tk.Tk):
             child.expect(device_prompt)
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f">>>>>>>>>>DHCP in the device {device}<<<<<<<<<<")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f">>>>>>>>>>DHCP in the device {device}<<<<<<<<<<\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def nat(self):
@@ -221,10 +231,12 @@ class InterfazGrafica(tk.Tk):
             
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f">>>>>>>>>>NAT in the device {device}<<<<<<<<<<")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f">>>>>>>>>>NAT in the device {device}<<<<<<<<<<\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def vpn(self):
@@ -248,10 +260,12 @@ class InterfazGrafica(tk.Tk):
             
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f">>>>>>>>>>VPN Rules {device}<<<<<<<<<<")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f">>>>>>>>>>VPN Rules {device}<<<<<<<<<<\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def snmp(self):
@@ -273,10 +287,12 @@ class InterfazGrafica(tk.Tk):
             child.expect(device_prompt)
 
             configuration = child.before.decode('utf-8')
-            self.label.config(text = '--------------------------------------------------------------------------')    
-            self.label.config(text = f">>>>>>>>>>SNMP in the device {device}<<<<<<<<<<")
-            self.label.config(text = configuration)
-            self.label.config(text = '------------------------------------------------------------------------\n\n')
+            full_text = ''
+            full_text += '--------------------------------------------------------------------------\n'
+            full_text += f">>>>>>>>>>SNMP in the device {device}<<<<<<<<<<\n"
+            full_text += configuration
+            full_text += '------------------------------------------------------------------------\n\n'
+            self.label.config(text=full_text)
             child.sendline('exit')
 
     def vlan(self):
